@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Leaflet Map</title>
+  
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.3/dist/leaflet.css" />
+    <style>
+     
+        body, html {
+            margin: 0;
+            padding: 0;
+            height: 100%;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+        }
+        #map {
+            height: 80%;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <h1>Leaflet Map</h1>
+    <div id="map"></div>
+
+ 
+    <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([-37.8136, 144.9631], 13); 
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '© OpenStreetMap contributors'
+        }).addTo(map);
+
+        const marker = L.marker([-37.8136, 144.9631]).addTo(map);
+        marker.bindPopup("<b>Melbourne</b><br>Australia's cultural capital.").openPopup();
+
+        const circle = L.circle([-37.8136, 144.9631], {
+            color: 'red',
+            fillColor: '#f03',
+            fillOpacity: 0.5,
+            radius: 500
+        }).addTo(map);
+
+        const polygon = L.polygon([
+            [-37.8136, 144.9631],
+            [-37.8206, 144.9601],
+            [-37.8186, 144.9701]
+        ]).addTo(map);
+
+        circle.bindPopup("I am a circle.");
+        polygon.bindPopup("I am a polygon.");
+    </script>
+</body>
+</html>

@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Highcharts Maps Example</title>
+    <script src="https://code.highcharts.com/maps/highmaps.js"></script>
+    <script src="https://code.highcharts.com/maps/modules/exporting.js"></script>
+    <script src="https://code.highcharts.com/mapdata/custom/world-highres.js"></script>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; }
+        #container { height: 80%; width: 100%; }
+    </style>
+</head>
+<body>
+    <div id="container"></div>
+    <script>
+        // Create the Highcharts map
+        Highcharts.mapChart('container', {
+            chart: {
+                map: 'custom/world-highres'
+            },
+            title: {
+                text: 'Highcharts World Map Example'
+            },
+            mapNavigation: {
+                enabled: true,
+                buttonOptions: {
+                    verticalAlign: 'bottom'
+                }
+            },
+            colorAxis: {
+                min: 0,
+                stops: [
+                    [0, '#EFEFFF'],
+                    [0.5, '#4444FF'],
+                    [1, '#000022']
+                ]
+            },
+            series: [{
+                data: [
+                    { 'hc-key': 'au', value: 25, name: 'Australia' },
+                    { 'hc-key': 'us', value: 331, name: 'United States' },
+                    { 'hc-key': 'cn', value: 1439, name: 'China' },
+                    { 'hc-key': 'in', value: 1380, name: 'India' }
+                ],
+                mapData: Highcharts.maps['custom/world-highres'],
+                joinBy: 'hc-key',
+                name: 'Population (millions)',
+                states: {
+                    hover: {
+                        color: '#BADA55'
+                    }
+                },
+                dataLabels: {
+                    enabled: true,
+                    format: '{point.name}'
+                },
+                tooltip: {
+                    pointFormat: '{point.name}: {point.value} million'
+                }
+            }]
+        });
+    </script>
+</body>
+</html>
