@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>OpenLayers Map Example</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/css/ol.css" type="text/css">
+    <script src="https://cdn.jsdelivr.net/gh/openlayers/openlayers.github.io@master/en/v6.5.0/build/ol.js"></script>
+    <style>
+        body, html { margin: 0; padding: 0; height: 100%; width: 100%; }
+        #container { height: 80%; width: 100%; display: flex; flex-direction: column; }
+        #title { text-align: center; padding: 10px 0; font-size: 24px; font-weight: bold; }
+        #map { flex: 1; }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="title">OpenLayers World Map Example</div>
+        <div id="map" class="map"></div>
+    </div>
+    <script>
+        const map = new ol.Map({
+            target: 'map',
+            layers: [
+                new ol.layer.Tile({
+                    source: new ol.source.OSM()
+                })
+            ],
+            view: new ol.View({
+                center: ol.proj.fromLonLat([144.9631, -37.8136]),
+                zoom: 10
+            })
+        });
+
+        const marker = new ol.Feature({
+            geometry: new ol.geom.Point(ol.proj.fromLonLat([144.9631, -37.8136]))
+        });
+
+        const vectorSource = new ol.source.Vector({
+            features: [marker]
+        });
+
+        const markerVectorLayer = new ol.layer.Vector({
+            source: vectorSource
+        });
+
+        map.addLayer(markerVectorLayer);
+    </script>
+</body>
+</html>
